@@ -1,0 +1,14 @@
+{
+    "name": "screeen/order-printing-woocommerce",
+    "description": "Print WooCommerce orders as PDF",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=7.4",
+        "dompdf/dompdf": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Screeen\\OrderPrinting\\": "includes/"
+        }
+    }
+}
