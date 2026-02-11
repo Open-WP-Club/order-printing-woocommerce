@@ -31,7 +31,9 @@ jobs:
 
           mkdir "$SLUG"
           cp -r order-printing-woocommerce.php LICENSE README.md "$SLUG/"
-          cp -r includes templates languages assets vendor "$SLUG/"
+          for dir in includes templates languages assets vendor; do
+            [ -d "$dir" ] && cp -r "$dir" "$SLUG/"
+          done
 
           zip -r "${SLUG}-${TAG}.zip" "$SLUG/" -x '*.DS_Store'
 
