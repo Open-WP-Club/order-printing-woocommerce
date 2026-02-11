@@ -64,7 +64,18 @@ class Order_PDF_Generator {
             ];
         }
 
+        $logo_uri = '';
+        $custom_logo_id = get_theme_mod('custom_logo');
+        if ($custom_logo_id) {
+            $logo_path = get_attached_file($custom_logo_id);
+            if ($logo_path && file_exists($logo_path)) {
+                $mime = wp_check_filetype($logo_path)['type'] ?: 'image/png';
+                $logo_uri = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($logo_path));
+            }
+        }
+
         return [
+            'logo'            => $logo_uri,
             'order_number'    => $order->get_order_number(),
             'order_date'      => wc_format_datetime($order->get_date_created()),
             'status'          => wc_get_order_status_name($order->get_status()),

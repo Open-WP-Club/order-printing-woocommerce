@@ -35,6 +35,10 @@ add_action('before_woocommerce_init', function () {
 /**
  * Check if WooCommerce is active before loading.
  */
+add_action('init', function () {
+    load_plugin_textdomain('order-printing-woocommerce', false, dirname(plugin_basename(__FILE__)) . '/languages');
+});
+
 function opw_init() {
     if (!class_exists('WooCommerce')) {
         add_action('admin_notices', function () {

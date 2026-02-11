@@ -39,6 +39,10 @@ defined('ABSPATH') || exit;
         font-weight: 700;
         letter-spacing: -0.5px;
     }
+    .header .logo img {
+        max-height: 50px;
+        max-width: 200px;
+    }
     .order-meta {
         text-align: right;
         font-size: 11px;
@@ -146,7 +150,11 @@ defined('ABSPATH') || exit;
 <table style="width:100%; margin-bottom:24px;">
     <tr>
         <td>
-            <h1><?php echo esc_html(get_bloginfo('name')); ?></h1>
+            <?php if (!empty($data['logo'])) : ?>
+                <div class="logo"><img src="<?php echo esc_attr($data['logo']); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>"></div>
+            <?php else : ?>
+                <h1><?php echo esc_html(get_bloginfo('name')); ?></h1>
+            <?php endif; ?>
         </td>
         <td class="order-meta">
             <strong><?php
