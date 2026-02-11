@@ -22,132 +22,141 @@ defined('ABSPATH') || exit;
     }
     body {
         font-family: 'DejaVu Sans', sans-serif;
-        font-size: 12px;
+        font-size: 0.6875rem;
         color: #1a1a1a;
-        line-height: 1.5;
-        padding: 40px;
+        line-height: 1.4;
+        padding: 1.25rem 1.875rem;
     }
+    /* ── Header ── */
     .header {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 2px solid #1a1a1a;
-        padding-bottom: 16px;
-        margin-bottom: 24px;
+        width: 100%;
+        border-bottom: 0.125rem solid #1a1a1a;
+        padding-bottom: 0.625rem;
+        margin-bottom: 0.875rem;
+    }
+    .header td {
+        vertical-align: top;
     }
     .header h1 {
-        font-size: 22px;
+        font-size: 1.125rem;
         font-weight: 700;
-        letter-spacing: -0.5px;
+        letter-spacing: -0.031rem;
     }
     .header .logo img {
-        max-height: 50px;
-        max-width: 200px;
+        max-height: 2.5rem;
+        max-width: 10rem;
+    }
+    .company-info {
+        font-size: 0.625rem;
+        color: #555;
+        line-height: 1.5;
+        padding: 0 1rem;
     }
     .order-meta {
         text-align: right;
-        font-size: 11px;
+        font-size: 0.625rem;
         color: #555;
+        white-space: nowrap;
     }
     .order-meta strong {
         color: #1a1a1a;
+        font-size: 0.75rem;
     }
+    /* ── Addresses ── */
     .addresses {
         width: 100%;
-        margin-bottom: 24px;
+        margin-bottom: 0.875rem;
     }
     .addresses td {
         width: 50%;
         vertical-align: top;
-        padding-right: 20px;
+        padding-right: 1rem;
     }
     .addresses h3 {
-        font-size: 11px;
+        font-size: 0.5625rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.0625rem;
         color: #888;
-        margin-bottom: 6px;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 4px;
+        margin-bottom: 0.25rem;
+        border-bottom: 0.0625rem solid #eee;
+        padding-bottom: 0.1875rem;
     }
     .addresses p {
-        font-size: 12px;
-        line-height: 1.6;
+        font-size: 0.6875rem;
+        line-height: 1.5;
     }
+    /* ── Items ── */
     table.items {
         width: 100%;
         border-collapse: collapse;
-        margin-bottom: 24px;
+        margin-bottom: 0.875rem;
     }
     table.items thead th {
         background: #f5f5f5;
         text-align: left;
-        padding: 8px 10px;
-        font-size: 10px;
+        padding: 0.3125rem 0.5rem;
+        font-size: 0.5625rem;
         text-transform: uppercase;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.05rem;
         color: #555;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 0.0625rem solid #ddd;
     }
     table.items thead th:last-child,
     table.items tbody td:last-child {
         text-align: right;
     }
     table.items tbody td {
-        padding: 10px;
-        border-bottom: 1px solid #eee;
-        font-size: 12px;
+        padding: 0.375rem 0.5rem;
+        border-bottom: 0.0625rem solid #eee;
+        font-size: 0.6875rem;
     }
-    .sku {
+    table.items .col-sku {
         color: #999;
-        font-size: 10px;
+        font-size: 0.5625rem;
+        white-space: nowrap;
     }
+    /* ── Totals ── */
     .totals {
-        width: 260px;
+        width: 13.75rem;
         margin-left: auto;
-        margin-bottom: 24px;
+        margin-bottom: 0.875rem;
     }
     .totals table {
         width: 100%;
         border-collapse: collapse;
     }
     .totals td {
-        padding: 5px 0;
-        font-size: 12px;
+        padding: 0.1875rem 0;
+        font-size: 0.6875rem;
     }
     .totals td:last-child {
         text-align: right;
     }
     .totals .grand-total td {
         font-weight: 700;
-        font-size: 14px;
-        border-top: 2px solid #1a1a1a;
-        padding-top: 8px;
+        font-size: 0.8125rem;
+        border-top: 0.125rem solid #1a1a1a;
+        padding-top: 0.375rem;
     }
+    /* ── Note ── */
     .note {
         background: #fafafa;
-        border-left: 3px solid #ddd;
-        padding: 10px 14px;
-        font-size: 11px;
+        border-left: 0.1875rem solid #ddd;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.625rem;
         color: #555;
-        margin-bottom: 24px;
+        margin-bottom: 0.875rem;
     }
     .note strong {
         display: block;
-        margin-bottom: 4px;
+        margin-bottom: 0.125rem;
         color: #1a1a1a;
-    }
-    .footer {
-        text-align: center;
-        font-size: 10px;
-        color: #aaa;
-        border-top: 1px solid #eee;
-        padding-top: 12px;
     }
 </style>
 </head>
 <body>
 
-<table style="width:100%; margin-bottom:24px;">
+<table class="header">
     <tr>
         <td>
             <?php if (!empty($data['logo'])) : ?>
@@ -156,13 +165,17 @@ defined('ABSPATH') || exit;
                 <h1><?php echo esc_html(get_bloginfo('name')); ?></h1>
             <?php endif; ?>
         </td>
+        <?php if (!empty($data['company_info'])) : ?>
+        <td class="company-info">
+            <?php echo nl2br(esc_html($data['company_info'])); ?>
+        </td>
+        <?php endif; ?>
         <td class="order-meta">
             <strong><?php
                 /* translators: %s: order number */
                 printf(esc_html__('Order #%s', 'order-printing-woocommerce'), esc_html($data['order_number']));
             ?></strong><br>
             <?php echo esc_html($data['order_date']); ?><br>
-            <?php echo esc_html($data['status']); ?><br>
             <?php echo esc_html($data['payment_method']); ?>
         </td>
     </tr>
@@ -186,6 +199,7 @@ defined('ABSPATH') || exit;
 <table class="items">
     <thead>
         <tr>
+            <th>SKU</th>
             <th><?php esc_html_e('Product', 'order-printing-woocommerce'); ?></th>
             <th><?php esc_html_e('Qty', 'order-printing-woocommerce'); ?></th>
             <th><?php esc_html_e('Total', 'order-printing-woocommerce'); ?></th>
@@ -194,12 +208,8 @@ defined('ABSPATH') || exit;
     <tbody>
         <?php foreach ($data['items'] as $item) : ?>
         <tr>
-            <td>
-                <?php echo esc_html($item['name']); ?>
-                <?php if (!empty($item['sku'])) : ?>
-                    <br><span class="sku">SKU: <?php echo esc_html($item['sku']); ?></span>
-                <?php endif; ?>
-            </td>
+            <td class="col-sku"><?php echo esc_html($item['sku']); ?></td>
+            <td><?php echo esc_html($item['name']); ?></td>
             <td><?php echo esc_html($item['quantity']); ?></td>
             <td><?php echo wp_kses_post($item['total']); ?></td>
         </tr>
@@ -236,10 +246,6 @@ defined('ABSPATH') || exit;
     <?php echo esc_html($data['customer_note']); ?>
 </div>
 <?php endif; ?>
-
-<div class="footer">
-    <?php echo esc_html(get_bloginfo('name')); ?> &mdash; <?php echo esc_html(home_url()); ?>
-</div>
 
 </body>
 </html>

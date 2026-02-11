@@ -36,6 +36,13 @@ class Order_PDF_Generator {
     }
 
     /**
+     * Return the rendered HTML (public access for inline preview).
+     */
+    public function render_html_public(): string {
+        return $this->render_html();
+    }
+
+    /**
      * Build the HTML for the PDF from the template.
      */
     private function render_html(): string {
@@ -76,6 +83,7 @@ class Order_PDF_Generator {
 
         return [
             'logo'            => $logo_uri,
+            'company_info'    => get_option('opw_company_info', ''),
             'order_number'    => $order->get_order_number(),
             'order_date'      => wc_format_datetime($order->get_date_created()),
             'status'          => wc_get_order_status_name($order->get_status()),

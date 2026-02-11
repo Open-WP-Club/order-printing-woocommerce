@@ -87,3 +87,23 @@ msgstr "Данък"
 #: templates/order-pdf-template.php:235
 msgid "Customer Note"
 msgstr "Бележка от клиента"
+
+#: includes/class-order-printing.php
+msgid "Print"
+msgstr "Печат"
+
+#: includes/class-order-printing.php
+msgid "Order Printing"
+msgstr "Печат на поръчки"
+
+#: includes/class-order-printing.php
+msgid "Company Info"
+msgstr "Фирмена информация"
+
+#: includes/class-order-printing.php
+msgid "Displayed in the header of printed orders, next to the logo. Use for contact details, VAT number, etc."
+msgstr "Показва се в хедъра на принтираните поръчки, до логото. Използвайте за контакти, ДДС номер и т.н."
+
+#: includes/class-order-printing.php
+msgid "Print Orders"
+msgstr "Печат на поръчки"
