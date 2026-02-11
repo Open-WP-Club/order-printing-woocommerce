@@ -23,7 +23,7 @@ defined('ABSPATH') || exit;
     body {
         font-family: 'DejaVu Sans', sans-serif;
         font-size: 0.6875rem;
-        color: #1a1a1a;
+        color: #000000ff;
         line-height: 1.4;
         padding: 1.25rem 1.875rem;
     }
@@ -48,18 +48,18 @@ defined('ABSPATH') || exit;
     }
     .company-info {
         font-size: 0.625rem;
-        color: #555;
+        color: #000000ff;
         line-height: 1.5;
         padding: 0 1rem;
     }
     .order-meta {
         text-align: right;
         font-size: 0.625rem;
-        color: #555;
+        color: #000000ff;
         white-space: nowrap;
     }
     .order-meta strong {
-        color: #1a1a1a;
+        color: #000000ff;
         font-size: 0.75rem;
     }
     /* ── Addresses ── */
@@ -111,7 +111,7 @@ defined('ABSPATH') || exit;
         font-size: 0.6875rem;
     }
     table.items .col-sku {
-        color: #999;
+        color: #000000ff;
         font-size: 0.5625rem;
         white-space: nowrap;
     }
@@ -144,13 +144,13 @@ defined('ABSPATH') || exit;
         border-left: 0.1875rem solid #ddd;
         padding: 0.5rem 0.75rem;
         font-size: 0.625rem;
-        color: #555;
+        color: #000000ff;
         margin-bottom: 0.875rem;
     }
     .note strong {
         display: block;
         margin-bottom: 0.125rem;
-        color: #1a1a1a;
+        color: #000000ff;
     }
 </style>
 </head>
