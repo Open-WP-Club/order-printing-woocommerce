@@ -146,6 +146,15 @@ defined('ABSPATH') || exit;
         display: block;
         margin-bottom: 0.125rem;
     }
+    .totals .subtotal-row td {
+        border-bottom: 0.0625rem solid #000;
+        padding-bottom: 0.375rem;
+    }
+    @media print {
+        @page {
+            margin: 0;
+        }
+    }
 </style>
 </head>
 <body>
@@ -225,7 +234,7 @@ defined('ABSPATH') || exit;
 
 <div class="totals">
     <table>
-        <tr>
+        <tr class="subtotal-row">
             <td><?php esc_html_e('Subtotal', 'order-printing-woocommerce'); ?></td>
             <td><?php echo wp_kses_post($data['subtotal']); ?></td>
         </tr>
