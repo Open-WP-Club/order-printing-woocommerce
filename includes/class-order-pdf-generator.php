@@ -62,12 +62,15 @@ class Order_PDF_Generator {
 
         $items = [];
         foreach ($order->get_items() as $item) {
-            $product = $item->get_product();
+            $product  = $item->get_product();
+            $qty      = $item->get_quantity();
+            $line_total = $item->get_total();
             $items[] = [
-                'name'     => $item->get_name(),
-                'sku'      => $product ? $product->get_sku() : '',
-                'quantity' => $item->get_quantity(),
-                'total'    => $order->get_formatted_line_subtotal($item),
+                'name'       => $item->get_name(),
+                'sku'        => $product ? $product->get_sku() : '',
+                'quantity'   => $qty,
+                'unit_price' => wc_price($qty ? $line_total / $qty : $line_total),
+                'total'      => $order->get_formatted_line_subtotal($item),
             ];
         }
 
@@ -89,6 +92,8 @@ class Order_PDF_Generator {
             'status'          => wc_get_order_status_name($order->get_status()),
             'payment_method'  => $order->get_payment_method_title(),
             'billing'         => $order->get_formatted_billing_address(),
+            'billing_phone'   => $order->get_billing_phone(),
+            'billing_email'   => $order->get_billing_email(),
             'shipping'        => $order->get_formatted_shipping_address(),
             'items'           => $items,
             'subtotal'        => $order->get_subtotal_to_display(),

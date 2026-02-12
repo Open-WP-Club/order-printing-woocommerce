@@ -101,8 +101,8 @@ defined('ABSPATH') || exit;
         color: #555;
         border-bottom: 0.0625rem solid #ddd;
     }
-    table.items thead th:last-child,
-    table.items tbody td:last-child {
+    table.items thead th:nth-last-child(-n+2),
+    table.items tbody td:nth-last-child(-n+2) {
         text-align: right;
     }
     table.items tbody td {
@@ -116,8 +116,13 @@ defined('ABSPATH') || exit;
         white-space: nowrap;
     }
     /* ── Totals ── */
+    .contact-info {
+        font-size: 0.625rem;
+        color: #555;
+        margin-top: 0.25rem;
+    }
     .totals {
-        width: 13.75rem;
+        width: 18rem;
         margin-left: auto;
         margin-bottom: 0.875rem;
     }
@@ -186,6 +191,16 @@ defined('ABSPATH') || exit;
         <td>
             <h3><?php esc_html_e('Billing Address', 'order-printing-woocommerce'); ?></h3>
             <p><?php echo wp_kses_post($data['billing']); ?></p>
+            <?php if (!empty($data['billing_phone']) || !empty($data['billing_email'])) : ?>
+            <div class="contact-info">
+                <?php if (!empty($data['billing_phone'])) : ?>
+                    <?php echo esc_html($data['billing_phone']); ?><br>
+                <?php endif; ?>
+                <?php if (!empty($data['billing_email'])) : ?>
+                    <?php echo esc_html($data['billing_email']); ?>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
         </td>
         <?php if (!empty($data['shipping'])) : ?>
         <td>
@@ -202,6 +217,7 @@ defined('ABSPATH') || exit;
             <th>SKU</th>
             <th><?php esc_html_e('Product', 'order-printing-woocommerce'); ?></th>
             <th><?php esc_html_e('Qty', 'order-printing-woocommerce'); ?></th>
+            <th><?php esc_html_e('Unit Price', 'order-printing-woocommerce'); ?></th>
             <th><?php esc_html_e('Total', 'order-printing-woocommerce'); ?></th>
         </tr>
     </thead>
@@ -211,6 +227,7 @@ defined('ABSPATH') || exit;
             <td class="col-sku"><?php echo esc_html($item['sku']); ?></td>
             <td><?php echo esc_html($item['name']); ?></td>
             <td><?php echo esc_html($item['quantity']); ?></td>
+            <td><?php echo wp_kses_post($item['unit_price']); ?></td>
             <td><?php echo wp_kses_post($item['total']); ?></td>
         </tr>
         <?php endforeach; ?>
