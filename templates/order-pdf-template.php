@@ -23,14 +23,14 @@ defined('ABSPATH') || exit;
     body {
         font-family: 'DejaVu Sans', sans-serif;
         font-size: 0.6875rem;
-        color: #000000ff;
+        color: #000;
         line-height: 1.4;
         padding: 1.25rem 1.875rem;
     }
     /* ── Header ── */
     .header {
         width: 100%;
-        border-bottom: 0.125rem solid #1a1a1a;
+        border-bottom: 0.125rem solid #000;
         padding-bottom: 0.625rem;
         margin-bottom: 0.875rem;
     }
@@ -48,18 +48,15 @@ defined('ABSPATH') || exit;
     }
     .company-info {
         font-size: 0.625rem;
-        color: #000000ff;
         line-height: 1.5;
         padding: 0 1rem;
     }
     .order-meta {
         text-align: right;
         font-size: 0.625rem;
-        color: #000000ff;
         white-space: nowrap;
     }
     .order-meta strong {
-        color: #000000ff;
         font-size: 0.75rem;
     }
     /* ── Addresses ── */
@@ -74,11 +71,9 @@ defined('ABSPATH') || exit;
     }
     .addresses h3 {
         font-size: 0.5625rem;
-        text-transform: uppercase;
         letter-spacing: 0.0625rem;
-        color: #888;
         margin-bottom: 0.25rem;
-        border-bottom: 0.0625rem solid #eee;
+        border-bottom: 0.0625rem solid #000;
         padding-bottom: 0.1875rem;
     }
     .addresses p {
@@ -96,10 +91,8 @@ defined('ABSPATH') || exit;
         text-align: left;
         padding: 0.3125rem 0.5rem;
         font-size: 0.5625rem;
-        text-transform: uppercase;
         letter-spacing: 0.05rem;
-        color: #555;
-        border-bottom: 0.0625rem solid #ddd;
+        border-bottom: 0.0625rem solid #000;
     }
     table.items thead th:nth-last-child(-n+2),
     table.items tbody td:nth-last-child(-n+2) {
@@ -107,18 +100,16 @@ defined('ABSPATH') || exit;
     }
     table.items tbody td {
         padding: 0.375rem 0.5rem;
-        border-bottom: 0.0625rem solid #eee;
+        border-bottom: 0.0625rem solid #000;
         font-size: 0.6875rem;
     }
     table.items .col-sku {
-        color: #000000ff;
         font-size: 0.5625rem;
         white-space: nowrap;
     }
     /* ── Totals ── */
     .contact-info {
         font-size: 0.625rem;
-        color: #555;
         margin-top: 0.25rem;
     }
     .totals {
@@ -140,22 +131,20 @@ defined('ABSPATH') || exit;
     .totals .grand-total td {
         font-weight: 700;
         font-size: 0.8125rem;
-        border-top: 0.125rem solid #1a1a1a;
+        border-top: 0.125rem solid #000;
         padding-top: 0.375rem;
     }
     /* ── Note ── */
     .note {
         background: #fafafa;
-        border-left: 0.1875rem solid #ddd;
+        border-left: 0.1875rem solid #000;
         padding: 0.5rem 0.75rem;
         font-size: 0.625rem;
-        color: #000000ff;
         margin-bottom: 0.875rem;
     }
     .note strong {
         display: block;
         margin-bottom: 0.125rem;
-        color: #000000ff;
     }
 </style>
 </head>
