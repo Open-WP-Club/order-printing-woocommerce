@@ -22,133 +22,137 @@ defined('ABSPATH') || exit;
     }
     body {
         font-family: 'DejaVu Sans', sans-serif;
-        font-size: 0.6875rem;
+        font-size: 11px;
         color: #000;
         line-height: 1.4;
-        padding: 1.25rem 1.875rem;
+        padding: 20px 30px;
     }
     /* ── Header ── */
     .header {
         width: 100%;
-        border-bottom: 0.125rem solid #000;
-        padding-bottom: 0.625rem;
-        margin-bottom: 0.875rem;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 14px;
     }
     .header td {
         vertical-align: top;
     }
     .header h1 {
-        font-size: 1.125rem;
+        font-size: 18px;
         font-weight: 700;
-        letter-spacing: -0.031rem;
+        letter-spacing: -0.5px;
     }
     .header .logo img {
-        max-height: 2.5rem;
-        max-width: 10rem;
+        max-height: 40px;
+        max-width: 160px;
     }
     .company-info {
-        font-size: 0.625rem;
+        font-size: 10px;
         line-height: 1.5;
-        padding: 0 1rem;
+        padding: 0 16px;
     }
     .order-meta {
         text-align: right;
-        font-size: 0.625rem;
+        font-size: 10px;
         white-space: nowrap;
     }
     .order-meta strong {
-        font-size: 0.75rem;
+        font-size: 12px;
     }
     /* ── Addresses ── */
     .addresses {
         width: 100%;
-        margin-bottom: 0.875rem;
+        margin-bottom: 14px;
     }
     .addresses td {
         width: 50%;
         vertical-align: top;
-        padding-right: 1rem;
+        padding-right: 16px;
     }
     .addresses h3 {
-        font-size: 0.5625rem;
-        letter-spacing: 0.0625rem;
-        margin-bottom: 0.25rem;
-        border-bottom: 0.0625rem solid #000;
-        padding-bottom: 0.1875rem;
+        font-size: 9px;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #000;
+        padding-bottom: 3px;
     }
     .addresses p {
-        font-size: 0.6875rem;
+        font-size: 11px;
         line-height: 1.5;
     }
     /* ── Items ── */
     table.items {
         width: 100%;
         border-collapse: collapse;
-        margin-bottom: 0.875rem;
+        margin-bottom: 14px;
     }
     table.items thead th {
         background: #f5f5f5;
         text-align: left;
-        padding: 0.3125rem 0.5rem;
-        font-size: 0.5625rem;
-        letter-spacing: 0.05rem;
-        border-bottom: 0.0625rem solid #000;
+        padding: 5px 8px;
+        font-size: 9px;
+        letter-spacing: 1px;
+        border-bottom: 1px solid #000;
     }
     table.items thead th:nth-last-child(-n+2),
     table.items tbody td:nth-last-child(-n+2) {
         text-align: right;
     }
     table.items tbody td {
-        padding: 0.375rem 0.5rem;
-        border-bottom: 0.0625rem solid #000;
-        font-size: 0.6875rem;
+        padding: 6px 8px;
+        border-bottom: 1px solid #000;
+        font-size: 11px;
     }
     table.items .col-sku {
-        font-size: 0.5625rem;
+        font-size: 9px;
         white-space: nowrap;
     }
     /* ── Totals ── */
     .contact-info {
-        font-size: 0.625rem;
-        margin-top: 0.25rem;
+        font-size: 10px;
+        margin-top: 4px;
     }
     .totals {
-        width: 18rem;
+        width: 288px;
         margin-left: auto;
-        margin-bottom: 0.875rem;
+        margin-bottom: 14px;
     }
     .totals table {
         width: 100%;
         border-collapse: collapse;
     }
     .totals td {
-        padding: 0.1875rem 0;
-        font-size: 0.6875rem;
+        padding: 3px 0;
+        font-size: 11px;
     }
     .totals td:last-child {
         text-align: right;
     }
     .totals .grand-total td {
         font-weight: 700;
-        font-size: 0.8125rem;
-        border-top: 0.125rem solid #000;
-        padding-top: 0.375rem;
+        font-size: 13px;
+        border-top: 2px solid #000;
+        padding-top: 6px;
     }
     /* ── Note ── */
     .note {
         background: #fafafa;
-        border-left: 0.1875rem solid #000;
-        padding: 0.5rem 0.75rem;
-        font-size: 0.625rem;
-        margin-bottom: 0.875rem;
+        border-left: 3px solid #000;
+        padding: 8px 12px;
+        font-size: 10px;
+        margin-bottom: 14px;
     }
     .note strong {
         display: block;
-        margin-bottom: 0.125rem;
+        margin-bottom: 2px;
     }
     .totals .subtotal-row td {
-        border-bottom: 0.0625rem solid #000;
-        padding-bottom: 0.375rem;
+        border-bottom: 1px solid #000;
+        padding-bottom: 6px;
+    }
+    /* @page outside @media print so DOMPDF applies it unconditionally */
+    @page {
+        margin: 0;
     }
     @media print {
         @page {
@@ -179,6 +183,7 @@ defined('ABSPATH') || exit;
                 printf(esc_html__('Order #%s', 'order-printing-woocommerce'), esc_html($data['order_number']));
             ?></strong><br>
             <?php echo esc_html($data['order_date']); ?><br>
+            <?php echo esc_html($data['status']); ?><br>
             <?php echo esc_html($data['payment_method']); ?>
         </td>
     </tr>
@@ -212,7 +217,7 @@ defined('ABSPATH') || exit;
 <table class="items">
     <thead>
         <tr>
-            <th>SKU</th>
+            <th><?php esc_html_e('SKU', 'order-printing-woocommerce'); ?></th>
             <th><?php esc_html_e('Product', 'order-printing-woocommerce'); ?></th>
             <th><?php esc_html_e('Qty', 'order-printing-woocommerce'); ?></th>
             <th><?php esc_html_e('Unit Price', 'order-printing-woocommerce'); ?></th>

@@ -60,17 +60,29 @@ msgstr "Адрес за фактуриране"
 msgid "Shipping Address"
 msgstr "Адрес за доставка"
 
-#: templates/order-pdf-template.php:189
+#: templates/order-pdf-template.php
+msgid "SKU"
+msgstr "Артикул №"
+
+#: templates/order-pdf-template.php
 msgid "Product"
 msgstr "Продукт"
 
-#: templates/order-pdf-template.php:190
+#: templates/order-pdf-template.php
 msgid "Qty"
 msgstr "Кол."
 
-#: templates/order-pdf-template.php:191 templates/order-pdf-template.php:227
+#: templates/order-pdf-template.php
+msgid "Unit Price"
+msgstr "Единична цена"
+
+#: templates/order-pdf-template.php
 msgid "Total"
 msgstr "Общо"
+
+#: templates/order-pdf-template.php
+msgid "Status"
+msgstr "Статус"
 
 #: templates/order-pdf-template.php:213
 msgid "Subtotal"

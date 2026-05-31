@@ -45,9 +45,20 @@ class Order_Printing {
     }
 
     /**
-     * Render the meta box — in HPOS the callback receives a WC_Order directly.
+     * Render the meta box.
+     * HPOS passes WC_Order; legacy CPT mode passes WP_Post — handle both.
+     *
+     * @param \WP_Post|\WC_Order $post_or_order
      */
-    public function render_meta_box(\WC_Order $order): void {
+    public function render_meta_box( $post_or_order ): void {
+        $order = $post_or_order instanceof \WC_Order
+            ? $post_or_order
+            : wc_get_order( $post_or_order->ID );
+
+        if ( ! $order ) {
+            return;
+        }
+
         $order_id = $order->get_id();
         $preview_nonce = wp_create_nonce('opw_preview_html_' . $order_id);
         ?>
@@ -73,8 +84,8 @@ class Order_Printing {
                     + '&_wpnonce=' + btn.dataset.nonce;
                 frame.src = url;
                 frame.onload = function(){
-                    frame.contentWindow.print();
-                    btn.disabled = false;
+                    var win = frame.contentWindow;
+                    setTimeout(function(){ win.print(); btn.disabled = false; }, 100);
                 };
             }
 
@@ -138,6 +149,7 @@ class Order_Printing {
         }
 
         $generator = new Order_PDF_Generator($order);
+        header('Content-Type: text/html; charset=UTF-8');
         echo $generator->render_html_public();
         exit;
     }
@@ -226,18 +238,23 @@ class Order_Printing {
             }
         }
 
+        if (empty($bodies)) {
+            wp_die(-1);
+        }
+
         // Use the first template's <head> for styles.
         $head = '';
         if (preg_match('/<head[^>]*>(.*)<\/head>/s', $parts[0], $m)) {
             $head = $m[1];
         }
 
-        echo '<!DOCTYPE html><html><head>' . $head . '
-        <style>.page-break { page-break-after: always; }</style>
-        </head><body>';
+        header('Content-Type: text/html; charset=UTF-8');
+        echo '<!DOCTYPE html><html><head>' . $head . '</head><body>';
 
         foreach ($bodies as $i => $body) {
-            echo '<div class="page-break">' . $body . '</div>';
+            // page-break-before on all but the first avoids a trailing blank page.
+            $style = $i > 0 ? ' style="page-break-before: always;"' : '';
+            echo '<div' . $style . '>' . $body . '</div>';
         }
 
         echo '</body></html>';
@@ -298,13 +315,19 @@ class Order_Printing {
 
         // If redirected back from bulk action, load print in hidden iframe.
         if (!empty($_GET['opw_print_url'])) {
-            $print_url = esc_url(rawurldecode($_GET['opw_print_url']));
-            echo '<iframe id="opw-bulk-frame" src="' . $print_url . '" style="position:absolute;left:-9999px;width:0;height:0;border:none;"></iframe>';
-            echo '<script>
-                document.getElementById("opw-bulk-frame").onload = function(){
-                    this.contentWindow.print();
-                };
-            </script>';
+            $decoded    = rawurldecode(sanitize_url($_GET['opw_print_url']));
+            $ajax_base  = admin_url('admin-ajax.php');
+            // Only allow URLs that point to our own admin-ajax.php endpoint.
+            if (strncmp($decoded, $ajax_base, strlen($ajax_base)) === 0) {
+                $print_url = esc_url($decoded);
+                echo '<iframe id="opw-bulk-frame" src="' . $print_url . '" style="position:absolute;left:-9999px;width:0;height:0;border:none;"></iframe>';
+                echo '<script>
+                    document.getElementById("opw-bulk-frame").onload = function(){
+                        var win = this.contentWindow;
+                        setTimeout(function(){ win.print(); }, 100);
+                    };
+                </script>';
+            }
         }
     }
 }

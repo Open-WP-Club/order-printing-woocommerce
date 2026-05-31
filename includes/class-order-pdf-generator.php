@@ -27,7 +27,7 @@ class Order_PDF_Generator {
         $options->set('defaultFont', 'DejaVu Sans');
 
         $dompdf = new Dompdf($options);
-        $dompdf->loadHtml($html);
+        $dompdf->loadHtml($html, 'UTF-8');
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
 
@@ -79,8 +79,11 @@ class Order_PDF_Generator {
         if ($custom_logo_id) {
             $logo_path = get_attached_file($custom_logo_id);
             if ($logo_path && file_exists($logo_path)) {
-                $mime = wp_check_filetype($logo_path)['type'] ?: 'image/png';
-                $logo_uri = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($logo_path));
+                $mime          = wp_check_filetype($logo_path)['type'] ?: 'image/png';
+                $file_contents = file_get_contents($logo_path);
+                if (false !== $file_contents) {
+                    $logo_uri = 'data:' . $mime . ';base64,' . base64_encode($file_contents);
+                }
             }
         }
 
