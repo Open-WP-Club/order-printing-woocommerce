@@ -7,12 +7,9 @@ use Dompdf\Options;
 
 defined('ABSPATH') || exit;
 
-class Order_PDF_Generator {
+readonly class Order_PDF_Generator {
 
-    private \WC_Order $order;
-
-    public function __construct(\WC_Order $order) {
-        $this->order = $order;
+    public function __construct(private \WC_Order $order) {
     }
 
     /**

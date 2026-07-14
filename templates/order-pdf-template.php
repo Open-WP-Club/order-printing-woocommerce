@@ -263,7 +263,7 @@ defined('ABSPATH') || exit;
 <?php if (!empty($data['customer_note'])) : ?>
 <div class="note">
     <strong><?php esc_html_e('Customer Note', 'order-printing-woocommerce'); ?></strong>
-    <?php echo esc_html($data['customer_note']); ?>
+    <?php echo nl2br(esc_html($data['customer_note'])); ?>
 </div>
 <?php endif; ?>
 
