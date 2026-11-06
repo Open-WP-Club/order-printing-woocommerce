@@ -2,6 +2,7 @@
 
 /**
  * Plugin Name: Order Printing for WooCommerce
+ * Tested up to: 7.1.4
  * Plugin URI: https://github.com/Open-WP-Club/order-printing-woocommerce
  * Description: Print WooCommerce orders as PDF directly from the order edit screen.
  * Version: 1.3.0
@@ -14,7 +15,7 @@
  * Requires at least: 6.0
  * Requires PHP: 8.2
  * WC requires at least: 7.0
- * WC tested up to: 9.6
+ * WC tested up to: 11.2.2
  */
 
 defined('ABSPATH') || exit;
